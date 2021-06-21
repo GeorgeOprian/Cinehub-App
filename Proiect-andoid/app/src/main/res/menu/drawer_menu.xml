@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_running_in_theaters"
+            android:icon="@drawable/ic_movie"
+            android:title="@string/running_in_theaters" />
+        <item
+            android:id="@+id/nav_bookings"
+            android:icon="@drawable/ic_bookings"
+            android:title="@string/bookings" />
+
+        <item
+            android:id="@+id/nav_manage_movies"
+            android:icon="@drawable/ic_search_movie"
+            android:title="@string/manage_movies"/>
+
+    </group>
+    <item android:title="@string/actions">
+        <menu>
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/log_out" />
+        </menu>
+    </item>
+</menu>

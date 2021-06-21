@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NavigationFragments.DeleteMovieFragment">
+
+
+        <TextView
+            android:id="@+id/delete_movies_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update movie"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.093" />
+
+        <EditText
+            android:id="@+id/search_movie_input"
+            android:layout_width="223dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="28dp"
+            android:autofillHints="@string/movie_title"
+            android:ems="10"
+            android:hint="@string/movie_title_to_be_updated"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.258" />
+
+        <Button
+            android:id="@+id/search_movie_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.891"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.257" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/container"
+            android:layout_width="347dp"
+            android:layout_height="454dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/search_movie_input"
+            app:layout_constraintVertical_bias="0.386" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

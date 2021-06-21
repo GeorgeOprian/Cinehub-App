@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/runningInTheatersFragment">
+    <fragment
+        android:id="@+id/runningInTheatersFragment"
+        android:name="com.example.cinehub.NavigationFragments.RunningInTheatersFragment"
+        android:label="Running In Theaters Fragment"
+        tools:layout="@layout/fragment_running_in_theaters">
+        <action
+            android:id="@+id/action_runningInTheatersFragment_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
+        <action
+            android:id="@+id/action_runningInTheatersFragment_to_manageMoviesFragment"
+            app:destination="@id/manageMoviesFragment" />
+        <action
+            android:id="@+id/action_runningInTheatersFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+        <!--        <action-->
+<!--            android:id="@+id/action_runningInTheatersFragment_to_searchMovieFragment"-->
+<!--            app:destination="@id/searchMovieFragment" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/searchMovieFragment"
+        android:name="com.example.cinehub.NavigationFragments.SearchMovieFragment"
+        android:label="Search Movie"
+        tools:layout="@layout/fragment_search_movie">
+<!--        <action-->
+<!--            android:id="@+id/action_searchMovieFragment_to_runningInTheatersFragment"-->
+<!--            app:destination="@id/runningInTheatersFragment" />-->
+        <action
+            android:id="@+id/action_searchMovieFragment_to_manageMoviesFragment"
+            app:destination="@id/manageMoviesFragment" />
+        <action
+            android:id="@+id/action_searchMovieFragment_to_runningDetailsFragment"
+            app:destination="@id/runningDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingsFragment"
+        android:name="com.example.cinehub.NavigationFragments.BookingsFragment"
+        android:label="Bookings Fragment"
+        tools:layout="@layout/fragment_bookings">
+        <action
+            android:id="@+id/action_bookingsFragment_to_runningInTheatersFragment"
+            app:destination="@id/runningInTheatersFragment" />
+        <action
+            android:id="@+id/action_bookingsFragment_to_displayBookingFragment"
+            app:destination="@id/displayBookingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/runningDetailsFragment"
+        android:name="com.example.cinehub.NavigationFragments.RunningDetailsFragment"
+        android:label="fragment_running_details"
+        tools:layout="@layout/fragment_running_details" >
+        <action
+            android:id="@+id/action_runningDetailsFragment_to_searchMovieFragment"
+            app:destination="@id/searchMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageMoviesFragment"
+        android:name="com.example.cinehub.NavigationFragments.ManageMoviesFragment"
+        android:label="fragment_manage_movies"
+        tools:layout="@layout/fragment_manage_movies" >
+        <action
+            android:id="@+id/action_manageMoviesFragment_to_searchMovieFragment"
+            app:destination="@id/searchMovieFragment" />
+        <action
+            android:id="@+id/action_manageMoviesFragment_to_runningInTheatersFragment"
+            app:destination="@id/runningInTheatersFragment" />
+        <action
+            android:id="@+id/action_manageMoviesFragment_to_deleteMovieFragment"
+            app:destination="@id/deleteMovieFragment" />
+        <action
+            android:id="@+id/action_manageMoviesFragment_to_updateMovieFragment"
+            app:destination="@id/updateMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteMovieFragment"
+        android:name="com.example.cinehub.NavigationFragments.DeleteMovieFragment"
+        android:label="fragment_delete_movie"
+        tools:layout="@layout/fragment_delete_movie" >
+        <action
+            android:id="@+id/action_deleteMovieFragment_to_manageMoviesFragment"
+            app:destination="@id/manageMoviesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.cinehub.NavigationFragments.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" >
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_runningInTheatersFragment"
+            app:destination="@id/runningInTheatersFragment" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_bookTicketFragment"
+            app:destination="@id/bookTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookTicketFragment"
+        android:name="com.example.cinehub.NavigationFragments.BookTicketFragment"
+        android:label="fragment_book_ticket"
+        tools:layout="@layout/fragment_book_ticket" >
+        <action
+            android:id="@+id/action_bookTicketFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateMovieFragment"
+        android:name="com.example.cinehub.NavigationFragments.UpdateMovieFragment"
+        android:label="fragment_update_movie"
+        tools:layout="@layout/fragment_update_movie" >
+        <action
+            android:id="@+id/action_updateMovieFragment_to_updateRuningDetailsFragment"
+            app:destination="@id/updateRuningDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateRuningDetailsFragment"
+        android:name="com.example.cinehub.NavigationFragments.UpdateRuningDetailsFragment"
+        android:label="fragment_update_runing_details"
+        tools:layout="@layout/fragment_update_runing_details" >
+        <action
+            android:id="@+id/action_updateRuningDetailsFragment_to_updateMovieFragment"
+            app:destination="@id/updateMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayBookingFragment"
+        android:name="com.example.cinehub.NavigationFragments.DisplayBookingFragment"
+        android:label="fragment_display_booking"
+        tools:layout="@layout/fragment_display_booking" >
+        <action
+            android:id="@+id/action_displayBookingFragment_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
+    </fragment>
+</navigation>

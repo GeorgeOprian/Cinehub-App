@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NavigationFragments.MovieDetailsFragment">
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="220dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:autoSizeMaxTextSize="26dp"
+            android:autoSizeMinTextSize="14dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/booking_qr_code"
+            android:layout_width="214dp"
+            android:layout_height="214dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.189"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="327dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/QR_code_generation_info"
+            android:justificationMode="inter_word"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.006" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:text="Running date"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.235"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.249" />
+
+        <TextView
+            android:id="@+id/running_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="01.01.2021"
+            android:textSize="16sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.155"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.236" />
+
+        <TextView
+            android:id="@+id/running_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="93dp"
+            android:text="Running time"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.232"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.235" />
+
+
+        <TextView
+            android:id="@+id/running_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="124dp"
+            android:text="12:00"
+
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.145" />
+
+        <TextView
+            android:id="@+id/reserved_seats_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="141dp"
+            android:text="Reserved seats"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.246" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Booking Id"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.223"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.594" />
+
+        <TextView
+            android:id="@+id/booking_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:text="123"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.239"
+            app:layout_constraintStart_toEndOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.581" />
+
+        <Button
+            android:id="@+id/delete_booking_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="257dp"
+            android:text="Delete Booking"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.368" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="86dp"
+            android:text="Hall number"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.227"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.048" />
+
+        <TextView
+            android:id="@+id/hall_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="87dp"
+            android:text="1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView29"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.045" />
+
+        <TextView
+            android:id="@+id/reserved_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[1, 2, 3]"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.129"
+            app:layout_constraintStart_toEndOf="@+id/reserved_seats_text"
+            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"
+            app:layout_constraintVertical_bias="0.513" />
+
+        <!--        <TextView-->
+<!--            android:id="@+id/reserved_seats"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="23dp"-->
+<!--            android:layout_marginTop="209dp"-->
+<!--            android:layout_marginBottom="180dp"-->
+<!--            android:paddingLeft="5dp"-->
+<!--            android:text="[1, 2, 3]"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/reserved_seats_text"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/booking_qr_code"-->
+<!--            app:layout_constraintVertical_bias="0.666" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,2 @@
+Pagina de cautare:
+    - o lista cu filmele care au titlul pe care il dam noi ca input

@@ -1,0 +1,15 @@
+- Pagina de import pentru filme
+    - dam numele si omdb il returneaza
+    - apoi de aici luam filmul si il scriem in firebase
+
+-Pagina principala
+    - luam din firebase si afisam
+
+-Pagina filmului
+    - detaliile din omdb
+    - rezerva bile
+
+- Istoric filme vazute
+    
+
+

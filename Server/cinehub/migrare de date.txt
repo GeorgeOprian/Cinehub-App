@@ -1,0 +1,2 @@
+python manage.py makemigrations cinehub_backend
+python manage.py migrate

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "18736678560",
+    "firebase_url": "https://cinehub-ee49c-default-rtdb.firebaseio.com",
+    "project_id": "cinehub-ee49c",
+    "storage_bucket": "cinehub-ee49c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18736678560:android:d1a98bccedd8a0145f6bc5",
+        "android_client_info": {
+          "package_name": "com.example.cinehub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18736678560-p21b3k6ipdnp2lqkfup7d44bv84ogvo4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3kmlyZe-9WF0xpyi70StNjxVuf8UC_nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18736678560-p21b3k6ipdnp2lqkfup7d44bv84ogvo4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

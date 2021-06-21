@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Cinehub</string>
+    <string name="search_movies_by_title">Search movies by title</string>
+    <string name="search">Search</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="enter_movie_title">Enter movie title</string>
+    <string name="errors_executing_query">There were some errors executing the query</string>
+
+
+    <string name="navigation_draw_open">Open navigation drawer</string>
+    <string name="navigation_draw_close">Close navigation drawer</string>
+
+
+    <!--    error messages-->
+    <string name="no_movie_title_entered">Movie title is required</string>
+    <string name="watched_movies">Watched movies</string>
+    <string name="running_in_theaters">Running in theaters</string>
+    <string name="bookings">Bookings</string>
+    <string name="manage_movies">Manage Movies</string>
+    <string name="log_out">Log out</string>
+    <string name="actions">Actions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manage_running_details">Manage running details for:</string>
+    <string name="add_to_database">Add to database</string>
+    <string name="select_the_day_of_running">Select the day of running:</string>
+    <string name="movie_title_to_be_deleted">Movie title to be deleted</string>
+    <string name="rotten_tomatoes">Rotten Tomatoes</string>
+    <string name="book_tickes">Book tickets</string>
+    <string name="imdb_rating">IMDB rating:</string>
+    <string name="imdb">IMDB: </string>
+    <string name="movie_title_to_be_updated">Movie title to be updated</string>
+    <string name="QR_code_generation_info">Scan the qr code to use the booking. (If the QR code does not appear on the screen it means that the booking expired or there were some problems generating the QR code.)</string>
+
+    <string-array name="halls_numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+</resources>
