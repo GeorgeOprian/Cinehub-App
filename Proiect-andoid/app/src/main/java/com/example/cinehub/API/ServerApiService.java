@@ -35,7 +35,7 @@ public interface ServerApiService {
     @DELETE("delete_movie")
     Call<Void> deleteMovie(@Query("imdb_id") String imdbId);
 
-    @POST("update_movie")
+    @PUT("update_movie")
     Call<RunningDTO> updateMovieRunningDetails(@Body RunningDTO running);
 
     @DELETE("delete_booking")

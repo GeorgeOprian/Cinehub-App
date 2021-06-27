@@ -36,19 +36,20 @@
             android:layout_width="216dp"
             android:layout_height="67dp"
 
-            android:paddingLeft="5dp"
-            android:paddingRight="20dp"
             android:layout_marginStart="28dp"
-            android:autoSizeMaxTextSize="26dp"
+            android:layout_marginRight="10dp"
+            android:autoSizeMaxTextSize="20dp"
             android:autoSizeMinTextSize="14dp"
             android:autoSizeTextType="uniform"
+            android:paddingLeft="5dp"
+            android:paddingRight="20dp"
             android:text="TextViewTextViewTe"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.035"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125" />
+            app:layout_constraintVertical_bias="0.12" />
 
         <TextView
             android:id="@+id/textView3"

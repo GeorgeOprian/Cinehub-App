@@ -36,7 +36,7 @@ public class UpdateMovieFragment extends Fragment implements OnShowMovieItemClic
     private Button searchButton;
     private EditText searchInput;
     private ShowMoviesAdapter adapter;
-
+    private List<MovieDTO> moviesList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +47,18 @@ public class UpdateMovieFragment extends Fragment implements OnShowMovieItemClic
         initAdapter();
         initSearchButton();
         return dataBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        moviesList = SharedBetweenFragments.getInstance().getMoviesReturnInUpdateSearch();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedBetweenFragments.getInstance().setMoviesReturnInUpdateSearch(moviesList);
     }
 
     private void initAdapter(){
@@ -81,7 +93,8 @@ public class UpdateMovieFragment extends Fragment implements OnShowMovieItemClic
             @Override
             public void onResponse(Call<GetMoviesDTO> call, Response<GetMoviesDTO> response) {
                 if (response.code() == 200) {
-                    adapter.submitList(response.body().getMoviesList());
+                    moviesList = response.body().getMoviesList();
+                    adapter.submitList(moviesList);
                 } else if (response.code() == SharedBetweenFragments.RESOURCE_NOT_FOUND){
                     List<MovieDTO> emptyList = new ArrayList<>();
                     adapter.submitList(emptyList);

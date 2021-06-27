@@ -43,7 +43,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/container"
-            android:layout_width="361dp"
+            android:layout_width="369dp"
             android:layout_height="578dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toBottomOf="@+id/search_movie_input"
-            app:layout_constraintVertical_bias="0.545" />
+            app:layout_constraintVertical_bias="0.539" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
