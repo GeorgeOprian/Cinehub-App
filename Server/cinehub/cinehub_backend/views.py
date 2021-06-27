@@ -59,7 +59,7 @@ def get_movies_by_title(request):
     for result in res:
         
         cursor.execute('select * from cinehub_backend_running_movie'
-                    + ' where movie_id like %s', [result['imdb_id']])
+                    + ' where movie_id like %s order by date, time', [result['imdb_id']])
         associated_runnings = dictfetchall(cursor)
 
         print ("IMDB id: ", result['imdb_id'], " -> associated running:", associated_runnings)
@@ -99,10 +99,17 @@ def get_bookings(request):
     print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     return JsonResponse(resp)
     
-def load_movies_that_run_on_same_date(date, hall_id):
+def load_movies_that_run_on_same_date_for_insert(date, hall_id):
     cursor = connection.cursor()
     cursor.execute('select * from cinehub_backend_running_movie '
-                    + ' where date = %s and hall_id = %s ', [date, hall_id])
+                    + ' where date = %s and hall_id = %s order by date, time', [date, hall_id])
+    res = dictfetchall(cursor)
+    return res
+
+def load_movies_that_run_on_same_date_for_update(date, hall_id, running_id):
+    cursor = connection.cursor()
+    cursor.execute('select * from cinehub_backend_running_movie '
+                    + ' where date = %s and hall_id = %s and running_id <> %s order by date, time', [date, hall_id, running_id])
     res = dictfetchall(cursor)
     return res
 
@@ -112,15 +119,15 @@ def add_movie(request): #basic post
     resp_code = RESP_CODE_SUCCES
     received_json_data = json.loads(request.body)
     movie_model = create_movie_model(received_json_data)
-   
+    movie_duration = movie_model.duration
     print ("Movie received: ", movie_model.__dict__)
     
     running_to_insert = create_running_movie_model(received_json_data)
     
-    running_in_the_same_day = load_movies_that_run_on_same_date(running_to_insert.date, running_to_insert.hall_id)
+    running_in_the_same_day = load_movies_that_run_on_same_date_for_insert(running_to_insert.date, running_to_insert.hall_id)
 
     if len(running_in_the_same_day) > 0:
-        if can_add_movie_with_running_date_problems(running_to_insert, running_in_the_same_day):
+        if can_add_movie_with_running_date_problems(running_to_insert, running_in_the_same_day, movie_duration):
             movie_model.save()
             running_to_insert.save()
         else:
@@ -136,21 +143,73 @@ def add_movie(request): #basic post
     print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     return JsonResponse(resp, status = resp_code)
 
-def can_add_movie_with_running_date_problems(running_to_insert, running_in_the_same_day):   
+def update_movie(request):
+    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    print("Update movie request")
+    running_dto = json.loads(request.body)
+    print ("Running to update received: ", running_dto)
+    resp_code = RESP_CODE_SUCCES
+    running_model = create_running_movie_model(running_dto)
+    running_model.running_id = running_dto['RunningId']
+    
+    running_in_the_same_day = load_movies_that_run_on_same_date_for_update(running_model.date, running_model.hall_id, running_model.running_id)
+
+    if len(running_in_the_same_day) > 0:
+        
+        if can_update_movie_with_running_date_problems(running_model, running_in_the_same_day):
+            running_model.save()
+        else:
+            print ("There is another movie that runs at the same date and time")
+            resp_code = RESP_CODE_COULD_NOT_INSERT_IN_DB
+    else:
+        running_model.save()
+    if running_model is RESP_CODE_SUCCES:
+        print ("Running updated succesfully")
+    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    resp = {"resp":"movie added succesfully"} 
+    
+    return JsonResponse(resp, status = resp_code)
+
+def can_add_movie_with_running_date_problems(running_to_insert, running_in_the_same_day, movie_to_check_duration):   
+    print("##############################")
+    print("Movies that run in the same day: ", running_in_the_same_day)
+    print("##############################")
+
+    cursor = connection.cursor()
+    
+    insert_movie = True
+    for running_movie in running_in_the_same_day:
+        
+        cursor.execute('select duration from cinehub_backend_movie '
+                        + ' where cinehub_backend_movie.imdb_id = %s', [running_movie['movie_id']])
+        movie_from_db_duration_dict = dictfetchall(cursor)
+        
+        if not can_movie_be_inserted_or_updated(running_to_insert.time, running_movie['time'], movie_to_check_duration, movie_from_db_duration_dict[0]['duration']):
+            insert_movie = False
+            break
+
+    return insert_movie
+
+
+def can_update_movie_with_running_date_problems(running_to_insert, running_in_the_same_day):   
     print("##############################")
     print("Movies that run in the same day: ", running_in_the_same_day)
     print("##############################")
     
-    insert_movie = False
+    cursor = connection.cursor()
+    cursor.execute('select duration from cinehub_backend_movie '
+                        + ' where cinehub_backend_movie.imdb_id = %s', [running_to_insert.movie_id])
+    movie_to_check_duration = dictfetchall(cursor)
+    
+    insert_movie = True
     for running_movie in running_in_the_same_day:
-        cursor = connection.cursor()
         cursor.execute('select duration from cinehub_backend_movie '
                         + ' where cinehub_backend_movie.imdb_id = %s', [running_movie['movie_id']])
-        duration_dict = dictfetchall(cursor)
+        movie_from_db_duration_dict = dictfetchall(cursor)
         
-        if can_movie_be_inserted_or_updated(running_movie['time'], running_to_insert.time, duration_dict[0]['duration']):
-            insert_movie = True
-
+        if not can_movie_be_inserted_or_updated(running_to_insert.time, running_movie['time'], movie_to_check_duration[0]['duration'], movie_from_db_duration_dict[0]['duration']):
+            insert_movie = False
+            break
     return insert_movie
 
 def add_booking(request):
@@ -171,32 +230,7 @@ def add_booking(request):
     print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     return JsonResponse(resp, status = resp_code)
 
-def update_movie(request):
-    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-    print("Update movie request")
-    running_dto = json.loads(request.body)
-    print ("Running to update received: ", running_dto)
-    resp_code = RESP_CODE_SUCCES
-    running_model = create_running_movie_model(running_dto)
-    running_model.running_id = running_dto['RunningId']
-    
-    running_in_the_same_day = load_movies_that_run_on_same_date(running_model.date, running_model.hall_id)
 
-    if len(running_in_the_same_day) > 0:
-        
-        if can_add_movie_with_running_date_problems(running_model, running_in_the_same_day):
-            running_model.save()
-        else:
-            print ("There is another movie that runs at the same date and time")
-            resp_code = RESP_CODE_COULD_NOT_INSERT_IN_DB
-    else:
-        running_model.save()
-    if running_model is RESP_CODE_SUCCES:
-        print ("Running updated succesfully")
-    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-    resp = {"resp":"movie added succesfully"} 
-    
-    return JsonResponse(resp, status = resp_code)
 
 def delete_movie(request):
     print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
@@ -368,15 +402,26 @@ def create_booking_dto (booking):
 
 #############
 #time checks
-def can_movie_be_inserted_or_updated(movie_to_insert_hour, movie_from_db, duration_string):
-    t1_extended = add_duration_to_running_hour(movie_to_insert_hour, duration_string, PAUSE_BETWEEN_MOVIES)
+def can_movie_be_inserted_or_updated(movie_to_insert_hour, movie_from_db, duration_t1_string, duration_t2_string):
 
-    # t1 = convert_string_time_to_object(t1_extended)
-    t2 = convert_string_time_to_object(movie_from_db)
+    t1 = convert_string_time_to_object(movie_to_insert_hour)
+    t1_extended = add_duration_to_running_hour(movie_to_insert_hour, duration_t1_string, PAUSE_BETWEEN_MOVIES)
     
-    if t1_extended < t2:
+    t2 = convert_string_time_to_object(movie_from_db)
+    t2_extended = add_duration_to_running_hour(movie_from_db, duration_t2_string, PAUSE_BETWEEN_MOVIES)
+    print("----------------------------------------")
+    print("t1 = ", t1)
+    print("durata t1= ", duration_t1_string)
+    print ("t1_extended = ", t1_extended)
+    print ("t2 = ", t2)
+    print("durata t2= ", duration_t2_string)
+    print ("t2_extended = ", t2_extended)
+    
+    if t1_extended < t2 or t1 > t2_extended:
+        print("poate insera")
         return True
     else:
+        print("nu poate insera")
         return False
 
 
