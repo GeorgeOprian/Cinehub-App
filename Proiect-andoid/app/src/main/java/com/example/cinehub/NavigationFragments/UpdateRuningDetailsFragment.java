@@ -267,6 +267,15 @@ public class UpdateRuningDetailsFragment extends Fragment implements AdapterView
         addToDbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (datePicked.isBefore(LocalDate.now())) {
+                    Toast.makeText(getContext(), "The date selected is before the current date.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (datePicked.equals(LocalDate.now()) && timePicked.isBefore(LocalTime.now())) {
+                    Toast.makeText(getContext(), "The time selected is before the current time.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 updateRunningDetails();
                 updateMovie(running);
 
