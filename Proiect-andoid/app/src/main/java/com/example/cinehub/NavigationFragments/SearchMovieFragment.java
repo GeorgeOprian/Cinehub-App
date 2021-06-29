@@ -24,8 +24,6 @@ import com.example.cinehub.SearchMovieAction.Search;
 import com.example.cinehub.SearchMovieAction.SearchResults;
 import com.example.cinehub.SharedBetweenFragments;
 import com.example.cinehub.databinding.FragmentSearchMovieBinding;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,7 +53,7 @@ public class SearchMovieFragment extends Fragment implements OnSearchItemClickLi
             public void onClick(View v) {
                 String movieTitle = searchInput.getText().toString();
                 if (movieTitle.equals("")) {
-                    showNoMovieTitleEnteredMessage();
+                    Toast.makeText(getContext(), "You have to enter a movie title.", Toast.LENGTH_LONG).show();
                 } else {
                     searchMovieByTitle(movieTitle.trim());
                 }
@@ -83,13 +81,13 @@ public class SearchMovieFragment extends Fragment implements OnSearchItemClickLi
                         Toast.makeText(getContext(), "Movie not found", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    showNoMovieTitleEnteredMessage();
+                    showErrorMessage();
                 }
             }
 
             @Override
             public void onFailure(Call<SearchResults> call, Throwable t) {
-                showNoMovieTitleEnteredMessage();
+                showErrorMessage();
             }
         });
     }
@@ -104,13 +102,13 @@ public class SearchMovieFragment extends Fragment implements OnSearchItemClickLi
                     SharedBetweenFragments.getInstance().setMovieToAddDisplayData(movie);
                     goToRunningDetailsFragment();
                 } else  {
-                    showNoMovieTitleEnteredMessage();
+                    showErrorMessage();
                 }
             }
 
             @Override
             public void onFailure(Call<MovieModel> call, Throwable t) {
-                showNoMovieTitleEnteredMessage();
+                showErrorMessage();
             }
         });
     }
@@ -124,7 +122,7 @@ public class SearchMovieFragment extends Fragment implements OnSearchItemClickLi
 
     }
 
-    private void showNoMovieTitleEnteredMessage() {
+    private void showErrorMessage() {
         Toast.makeText(getContext(), getString(R.string.errors_executing_query), Toast.LENGTH_LONG).show();
     }
 

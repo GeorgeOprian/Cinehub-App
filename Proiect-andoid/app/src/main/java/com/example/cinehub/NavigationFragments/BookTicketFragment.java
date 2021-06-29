@@ -63,6 +63,7 @@ public class BookTicketFragment extends Fragment {
     private void initLayout() {
         dataBinding.movieTitle.setText(movie.getTitle());
         dataBinding.runningDate.setText(movie.getRunningDate());
+        dataBinding.runningTime.setText(movie.getRunningTime());
         dataBinding.hallNumber.setText(movie.getHallNumber());
         {
             List<Integer> listOfSeats =  movie.getOccupiedSeats();
@@ -88,7 +89,6 @@ public class BookTicketFragment extends Fragment {
                     BookingDTO booking = createBooking();
                     if (booking != null) {
                         sendBookingToServer(booking);
-
                     }
                  }
             }
@@ -104,12 +104,7 @@ public class BookTicketFragment extends Fragment {
         bookingDTO.setHallNumber(movie.getHallNumber());
         List<Integer> listOfSeats = createListOfSeats();
         if (listOfSeats != null) {
-//            if (!areTheSeatsReserverd(listOfSeats)) {
                 bookingDTO.setListOfReservedSeats(listOfSeats);
-//            } else {
-//                Toast.makeText(getContext(), "You have to select a seat that was not already reserved", Toast.LENGTH_LONG).show();
-//                return null;
-//            }
         } else {
             if (!inputFailed) {
                 Toast.makeText(getContext(), "You have to select at least a seat", Toast.LENGTH_LONG).show();
@@ -117,16 +112,6 @@ public class BookTicketFragment extends Fragment {
             return null;
         }
         return bookingDTO;
-    }
-
-    private boolean areTheSeatsReserverd(List<Integer> listOfSeats) {
-        List<Integer> reservedSeats = movie.getOccupiedSeats();
-        for (Integer seat:listOfSeats) {
-            if (reservedSeats.contains(seat)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void sendBookingToServer(BookingDTO booking) {

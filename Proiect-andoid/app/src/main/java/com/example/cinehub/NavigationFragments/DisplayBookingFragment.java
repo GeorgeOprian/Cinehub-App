@@ -54,9 +54,6 @@ public class DisplayBookingFragment extends Fragment {
     private void initLayout() {
         dataBinding.movieTitle.setText(booking.getMovieTitle());
         Bitmap bookingQRCode = createQRCode(booking.getBookingId());
-//        Picasso.get().load(booking.getPoster()).into(dataBinding.mooviePoster);
-        LocalDate runningDate = LocalDate.parse(booking.getRunningDate());
-        LocalTime runningTime = LocalTime.parse(booking.getRunningTime());
         if (isBookingAvailable() && bookingQRCode != null) {
             dataBinding.bookingQrCode.setImageBitmap(bookingQRCode);
         } else {

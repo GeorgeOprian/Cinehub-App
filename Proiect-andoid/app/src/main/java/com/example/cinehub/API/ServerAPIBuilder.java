@@ -9,6 +9,7 @@ public class ServerAPIBuilder {
 
     private static ServerApiService serverAPI;
     private final static String BASE_URL = "http://192.168.0.116:8081";
+//    private final static String BASE_URL = "http://192.168.205.1:8081"; // in cazul in care nu merge wifi ul
 
     public static ServerApiService getInstance(){
         if(serverAPI == null){

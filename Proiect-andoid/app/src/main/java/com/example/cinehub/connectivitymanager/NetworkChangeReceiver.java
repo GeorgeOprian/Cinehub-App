@@ -19,11 +19,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
             listener.networkChange();
-//            if (isOnline(context)) {
-//                isOnline = true;
-//            } else {
-//                isOnline = false;
-//            }
         }
     }
 

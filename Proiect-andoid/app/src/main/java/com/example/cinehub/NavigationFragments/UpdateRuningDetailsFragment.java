@@ -76,7 +76,6 @@ public class UpdateRuningDetailsFragment extends Fragment implements AdapterView
         initAddToDbButton();
 
         running = RunningDTO.createRunningDTO(movie);
-//        Toast.makeText(getContext(), movie.getTitle() + "was added to data base", Toast.LENGTH_LONG).show();
 
         return dataBinding.getRoot();
     }

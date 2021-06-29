@@ -13,14 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.cinehub.API.OMDBAPIBuilder;
 import com.example.cinehub.API.ServerAPIBuilder;
 import com.example.cinehub.Adapters.OnShowMovieItemClickListener;
 import com.example.cinehub.Adapters.ShowMoviesAdapter;
 import com.example.cinehub.Movie.GetMoviesDTO;
 import com.example.cinehub.Movie.MovieDTO;
 import com.example.cinehub.R;
-import com.example.cinehub.SearchMovieAction.SearchResults;
 import com.example.cinehub.SharedBetweenFragments;
 import com.example.cinehub.databinding.FragmentDeleteMovieBinding;
 
@@ -63,17 +61,13 @@ public class DeleteMovieFragment extends Fragment implements OnShowMovieItemClic
             public void onClick(View v) {
                 String movieTitle = searchInput.getText().toString();
                 if (movieTitle.equals("")) {
-                    showNoMovieTitleEnteredMessage();
+                    Toast.makeText(getContext(), "You have to enter a movie title.", Toast.LENGTH_SHORT).show();
                 } else {
                     searchMovieByTitle(movieTitle);
                 }
             }
 
         });
-    }
-
-    private void showNoMovieTitleEnteredMessage() {
-        Toast.makeText(getContext(), getString(R.string.errors_executing_query), Toast.LENGTH_LONG).show();
     }
 
     private void deleteMovieRequest(String imdbId) {
@@ -113,7 +107,11 @@ public class DeleteMovieFragment extends Fragment implements OnShowMovieItemClic
             @Override
             public void onResponse(Call<GetMoviesDTO> call, Response<GetMoviesDTO> response) {
                 if (response.code() == 200) {
-                    adapter.submitList(response.body().getMoviesList());
+                    List<MovieDTO> movieList = response.body().getMoviesList();
+                    if (movieList.size() == 0) {
+                        Toast.makeText(getContext(), "No data found.", Toast.LENGTH_SHORT).show();
+                    }
+                    adapter.submitList(movieList);
                 } else if (response.code() == SharedBetweenFragments.RESOURCE_NOT_FOUND){
                     List<MovieDTO> emptyList = new ArrayList<>();
                     adapter.submitList(emptyList);

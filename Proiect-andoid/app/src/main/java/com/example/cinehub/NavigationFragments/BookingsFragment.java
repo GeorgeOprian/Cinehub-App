@@ -69,7 +69,7 @@ public class BookingsFragment extends Fragment implements OnShowBookingItemClick
 
     private void getBookingsFromDB() {
         String userId = SharedBetweenFragments.getInstance().getUser().getUid();
-        Call<GetBookingsDTO> call = ServerAPIBuilder.getInstance().getBookingsForUser(userId); //just for tests
+        Call<GetBookingsDTO> call = ServerAPIBuilder.getInstance().getBookingsForUser(userId);
 
         call.enqueue(new Callback<GetBookingsDTO>() {
             @Override

@@ -92,8 +92,8 @@ public class RunningDetailsFragment extends Fragment implements AdapterView.OnIt
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initTimePickerButton() {
-        initTimePicker();
         timeButton = dataBinding.timePickerButton;
+        initTimePicker();
         initTimeButtonClickAction();
     }
 
@@ -219,7 +219,8 @@ public class RunningDetailsFragment extends Fragment implements AdapterView.OnIt
             }
         };
         int style = AlertDialog.THEME_HOLO_LIGHT;
-        timePicked = LocalTime.parse("12:00");
+        timePicked = LocalTime.now();
+        timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d", timePicked.getHour(), timePicked.getMinute()));
         initTimePickerDialog(onTimeSetListener, style);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)

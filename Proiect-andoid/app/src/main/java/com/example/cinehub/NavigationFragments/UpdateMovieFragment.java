@@ -74,7 +74,7 @@ public class UpdateMovieFragment extends Fragment implements OnShowMovieItemClic
             public void onClick(View v) {
                 String movieTitle = searchInput.getText().toString();
                 if (movieTitle.equals("")) {
-                    showNoMovieTitleEnteredMessage();
+                    Toast.makeText(getContext(), "You have to enter a movie title.", Toast.LENGTH_SHORT).show();
                 } else {
                     searchMovieByTitle(movieTitle);
                 }
@@ -83,17 +83,20 @@ public class UpdateMovieFragment extends Fragment implements OnShowMovieItemClic
         });
     }
 
-    private void showNoMovieTitleEnteredMessage() {
+    private void showErrorMessage() {
         Toast.makeText(getContext(), getString(R.string.errors_executing_query), Toast.LENGTH_LONG).show();
     }
 
     private void searchMovieByTitle(String title) {
-        Call<GetMoviesDTO> call = ServerAPIBuilder.getInstance().getMoviesByTitle(title); //just for tests
+        Call<GetMoviesDTO> call = ServerAPIBuilder.getInstance().getMoviesByTitle(title);
         call.enqueue(new Callback<GetMoviesDTO>() {
             @Override
             public void onResponse(Call<GetMoviesDTO> call, Response<GetMoviesDTO> response) {
                 if (response.code() == 200) {
                     moviesList = response.body().getMoviesList();
+                    if (moviesList.size() == 0) {
+                        Toast.makeText(getContext(), "No data found.", Toast.LENGTH_SHORT).show();
+                    }
                     adapter.submitList(moviesList);
                 } else if (response.code() == SharedBetweenFragments.RESOURCE_NOT_FOUND){
                     List<MovieDTO> emptyList = new ArrayList<>();

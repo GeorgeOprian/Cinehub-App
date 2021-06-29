@@ -37,7 +37,6 @@ public class ShowMoviesAdapter extends RecyclerView.Adapter<ShowMoviesAdapter.Mo
     public ShowMoviesAdapter.MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ShowMoviesAdapter.MovieViewHolder(DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-//                R.layout.show_movie_card,
                 R.layout.show_movie_card,
                 parent,
                 false)
@@ -65,8 +64,6 @@ public class ShowMoviesAdapter extends RecyclerView.Adapter<ShowMoviesAdapter.Mo
 
         public void bind(MovieDTO item){
             binding.title.setText(item.getTitle());
-            TextView movieTitle = binding.title;
-//            movieTitle.setTextSize(SharedBetweenFragments.calculateFontSize(item.getTitle()));
             binding.hallNumber.setText(item.getHallNumber());
             binding.runningDate.setText(item.getRunningDate());
             binding.runningTime.setText(item.getRunningTime());

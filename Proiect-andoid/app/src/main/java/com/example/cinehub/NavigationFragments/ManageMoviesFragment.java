@@ -25,7 +25,6 @@ public class ManageMoviesFragment extends Fragment {
                              Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_manage_movies, container, false);
 
-
         initNavigationButtons();
 
         return dataBinding.getRoot();

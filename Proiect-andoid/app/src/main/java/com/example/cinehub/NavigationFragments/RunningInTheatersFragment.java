@@ -69,7 +69,7 @@ public class RunningInTheatersFragment extends Fragment implements OnShowMovieIt
     }
 
     private void getMoviesFromDataBase() {
-        Call<GetMoviesDTO> call = ServerAPIBuilder.getInstance().getMovies(); //just for tests
+        Call<GetMoviesDTO> call = ServerAPIBuilder.getInstance().getMovies();
 
         call.enqueue(new Callback<GetMoviesDTO>() {
             @Override
