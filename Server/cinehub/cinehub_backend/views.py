@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
 import json
-from datetime import datetime, timedelta
+from datetime import date as dt, datetime, timedelta
 
 # Create your views here.
 
@@ -26,7 +26,10 @@ def get_movies(request): #basic get
     print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     print ("Get movies: ")
     
-    runnings = Running_movie.objects.all()
+    # runnings = Running_movie.objects.all()
+    runnings = Running_movie.objects.filter(date__gte=str(dt.today()))
+    runnings = runnings.exclude(date=str(dt.today()), time__lte=str(datetime.now().time()))
+    runnings = runnings.order_by('date', 'time')
     list_of_movies = []
     for running in runnings:
         movie_dto = create_movie_dto(running.movie.__dict__, running.__dict__)
@@ -34,7 +37,8 @@ def get_movies(request): #basic get
 
     resp = {}
     resp['ListOfMovies'] = list_of_movies
-    print("Response:")
+    print("Response length:", len(list_of_movies))
+    print("Response:", list_of_movies)
     print (resp)
     print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     return JsonResponse(resp)
@@ -56,16 +60,16 @@ def get_movies_by_title(request):
         return HttpResponse(status = RESP_CODE_RESOURCE_NOT_FOUND)
     list_of_movies = []
     print("##############################")
-    for result in res:
+    for movie in res:
         
         cursor.execute('select * from cinehub_backend_running_movie'
-                    + ' where movie_id like %s order by date, time', [result['imdb_id']])
+                    + ' where movie_id like %s order by date, time', [movie['imdb_id']])
         associated_runnings = dictfetchall(cursor)
 
-        print ("IMDB id: ", result['imdb_id'], " -> associated running:", associated_runnings)
+        print ("IMDB id: ", movie['imdb_id'], " -> associated running:", associated_runnings)
         print("##############################")
         for running in associated_runnings:
-            list_of_movies.append(create_movie_dto(result, running))
+            list_of_movies.append(create_movie_dto(movie, running))
 
     resp = {}
     resp['ListOfMovies'] = list_of_movies
@@ -89,8 +93,8 @@ def get_bookings(request):
     res = dictfetchall(cursor)
     
     bookings = []
-    for result in res:
-        bookings.append(create_booking_dto(result))
+    for booking in res:
+        bookings.append(create_booking_dto(booking))
     
     resp = {}
     resp['ListOfBookings'] = bookings
@@ -409,19 +413,19 @@ def can_movie_be_inserted_or_updated(movie_to_insert_hour, movie_from_db, durati
     
     t2 = convert_string_time_to_object(movie_from_db)
     t2_extended = add_duration_to_running_hour(movie_from_db, duration_t2_string, PAUSE_BETWEEN_MOVIES)
-    print("----------------------------------------")
-    print("t1 = ", t1)
-    print("durata t1= ", duration_t1_string)
-    print ("t1_extended = ", t1_extended)
-    print ("t2 = ", t2)
-    print("durata t2= ", duration_t2_string)
-    print ("t2_extended = ", t2_extended)
+    # print("----------------------------------------")
+    # print("t1 = ", t1)
+    # print("durata t1= ", duration_t1_string)
+    # print ("t1_extended = ", t1_extended)
+    # print ("t2 = ", t2)
+    # print("durata t2= ", duration_t2_string)
+    # print ("t2_extended = ", t2_extended)
     
     if t1_extended < t2 or t1 > t2_extended:
-        print("poate insera")
+        # print("poate insera")
         return True
     else:
-        print("nu poate insera")
+        # print("nu poate insera")
         return False
 
 
@@ -430,6 +434,10 @@ def convert_string_time_to_object(string_time):
 
 def convert_time_to_formated_string(time):
     return time.strftime('%H:%M')
+
+def convert_string_date_to_object(string_date):
+    print("data primita", string_date)
+    return datetime.strptime(string_date, '%Y-%m-%d').date()
 
 
 def add_duration_to_running_hour(running_hour_string, duration_string, pause_time):

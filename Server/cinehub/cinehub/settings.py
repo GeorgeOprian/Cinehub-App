@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '192.168.0.116', 
     '192.168.0.115', 
+    '192.168.205.1', #daca nu merge wifi-ul
     'localhost', 
     '127.0.0.1'
 ]
